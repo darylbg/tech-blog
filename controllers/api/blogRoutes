@@ -1,7 +1,7 @@
 const router = require('express').Router();
-const Blog = require('../models/Blog');
-const Comment = require('../models/Comment');
-const User = require('../models/User');
+const { Blog } = require('../../models/Blog');
+const { Comment } = require('../../models/Comment');
+const { User } = require('../../models/User');
 
 router.get('/', async (req, res) => {
     try {
@@ -17,7 +17,6 @@ router.get('/', async (req, res) => {
                 }
             ]
         });
-        console.log(dbBlogs);
         if(!dbBlogs) {
             res.status(400).send('no blog posts yet')
         }
@@ -28,7 +27,6 @@ router.get('/', async (req, res) => {
             blogs
         });
     } catch (error) {
-        console.log(error);
         res.status(500).json(error); 
     }
 });
