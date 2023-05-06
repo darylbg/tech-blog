@@ -1,3 +1,11 @@
 <section>
-    <h1>Blogs section</h1>
+    {{#each blogs as |blog|}}
+    <div class="blog">
+        <p>{{blog.body}}</p>
+        <p>{{user.name}}</p>
+        {{#each comments as |comment|}}
+        <p>{{comment.body}}</p>
+        {{/each}}
+    </div>
+    {{/each}}
 </section>
