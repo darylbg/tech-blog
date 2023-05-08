@@ -1,36 +1,27 @@
 const router = require('express').Router();
-const Blog = require('../models/Blog');
-const Comment = require('../models/Comment');
-const User = require('../models/User');
+const { User, Blog, Comment } = require('../models');
 
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
     try {
-        const dbBlogs = await Blog.findAll({
-            include: [
-                {
-                    model: Comment,
-                    attributes: ['body']
-                },
-                {
-                    model: User,
-                    attributes: ['name']
-                }
-            ]
-        });
-        //console.log(dbBlogs);
-        if(!dbBlogs) {
-            res.status(400).send('no blog posts yet')
-        }
-        const blogs = dbBlogs.map((blog) => 
-            blog.get({ plain: true })
-        );
-        res.render('blogs', {
-            blogs
-        });
+      const dbBlogs = await Blog.findAll({
+         include: [
+                  {
+                      model: Comment,
+                      attributes: ['body'] 
+                  },
+                  {
+                      model: User,
+                      attributes: ['name']
+                  }
+                 ]
+      });
+  
+      const blogs = dbBlogs.map((blog) => blog.get({ plain: true }));
+      res.render("blogs", { blogs });
     } catch (error) {
-        console.log(error);
-        res.status(500).json(error); 
+      console.log(error);
+      res.status(500).json(error);
     }
-});
+  });
 
 module.exports = router;

@@ -2,9 +2,9 @@
     {{#each blogs as |blog|}}
     <div class="blog">
         <p>{{blog.body}}</p>
-        <p>{{user.name}}</p>
+        <p style="color:aqua">{{user.name}}</p>
         {{#each comments as |comment|}}
-        <p>{{comment.body}}</p>
+        <p style="color: brown;">{{comment.body}}</p>
         {{/each}}
     </div>
     {{/each}}
